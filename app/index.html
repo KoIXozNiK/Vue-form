@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta name="description" content="">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- Template Basic Images Start -->
+  <meta property="og:image" content="">
+  <link rel="icon" href="">
+  <link rel="apple-touch-icon" sizes="140x140" href="">
+  <meta name="theme-color" content="#000">
+
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/animate.min.css">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <div class="overlay"></div>
+
+    <div id="app">
+      <h1>Form Validation</h1>
+
+      <form
+        class="custom__form custom__form-val"
+        @submit.prevent="submitForm"
+      >
+        <div class="custom__box-input">
+          <input
+            class="custom__input"
+            type="text"
+            name="name"
+            v-model="form.name"
+            @blur="$v.form.name.$touch()"
+            :class="{disabled : $v.form.name.$error, enabled : !$v.form.name.$invalid || !$v.form.name.minLength || !$v.form.name.maxLength}"
+          >
+          <label class="custom__label">Имя:</label>
+          <p
+            class="error"
+            v-if="!$v.form.name.required && $v.form.name.$error"
+          >Это поле обязательно для заполнения</p>
+          <p
+            class="error"
+            v-else-if="!$v.form.name.minLength && $v.form.name.$error"
+          >Миниму 3 символа </p>
+          <p
+            class="error"
+            v-else-if="!$v.form.name.maxLength && $v.form.name.$error"
+          >Максимум 16 символов</p>
+        </div>
+
+        <div class="custom__box-input">
+          <input
+            class="custom__input"
+            type="text"
+            name="email"
+            v-model.email="form.email"
+            @blur="$v.form.email.$touch()"
+            :class="{disabled : $v.form.email.$invalid, enabled : !$v.form.email.$invalid || !$v.form.email.email}"
+          >
+          <label class="custom__label">Почта:</label>
+          <p
+            class="error"
+            v-if="!$v.form.email.required && $v.form.email.$error"
+          >Это поле обязательно для заполнения</p>
+          <p
+            class="error"
+            v-else-if="!$v.form.email.email && $v.form.email.$error"
+          >Вы ввели некорректный e-mail</p>
+        </div>
+
+        <div class="custom__box-input">
+          <input
+            class="custom__input"
+            type="text"
+            name="tel"
+            v-model="form.tel"
+            @blur="$v.form.tel.$touch()"
+            :class="{disabled : $v.form.tel.$error, enabled : !$v.form.tel.$invalid}"
+          >
+          <label class="custom__label">Телефон:</label>
+          <p
+            class="error"
+            v-if="$v.form.tel.$error"
+          >Это поле обязательно для заполнения</p>
+        </div>
+
+        <div class="custom__box-input">
+          <input
+            class="custom__input"
+            type="text"
+            name="company"
+            v-model="form.company"
+            @blur="$v.form.company.$touch()"
+            :class="{disabled : $v.form.company.$error, enabled : !$v.form.company.$invalid || !$v.form.company.minLength || !$v.form.company.maxLength}"
+          >
+          <label class="custom__label">Компания:</label>
+          <p
+            class="error"
+            v-if="!$v.form.company.required && $v.form.company.$error"
+          >Это поле обязательно для заполнения</p>
+          <p
+            class="error"
+            v-else-if="!$v.form.company.minLength && $v.form.company.$error"
+          >Миниму 3 символа</p>
+          <p
+            class="error"
+            v-else-if="!$v.form.company.maxLength && $v.form.company.$error"
+          >Максимум 32 символов</p>
+        </div>
+        <button
+          type="submit"
+          class="custom__btn a-btn-2 animated slow bounceIn"
+          :disabled="$v.form.$invalid"
+          @click="$v.$reset"
+          :class="{disabled : $v.form.$invalid}"
+        >Свяжитесь с нами
+        </button>
+      </form>
+    </div>
+
+    <div class="popup__ok">
+      <div class="popup__ok-icon--ok">
+        <i class="fas fa-check-circle"></i>
+      </div>
+      <div class="popup__ok-title--ok">Заявка успешно отправлена</div>
+      <div class="popup__form-close popup__ok-close">
+        <i class="fas fa-times"></i>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="js/vuelidate.min.js"></script>
+    <script src="js/validators.min.js"></script>
+    <script src="js/jQuery.min.js" ></script>
+		<script src="js/wow.min.js" ></script>
+		<script src="js/main.js" ></script>
+</body>
+</html>
