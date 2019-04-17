@@ -61,8 +61,13 @@ new Vue({
         'pointer-events': 'visible'
       })
 
-      console.log($('.custom__box-input .error'));
-
+      axios.post($(this.form).attr('action'))
+        .then((responce) =>{
+          console.log(responce);
+        })
+        .catch((error) => {
+          console.log(error);
+        })
     }
   }
 })
