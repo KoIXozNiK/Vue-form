@@ -42,7 +42,7 @@ new Vue({
   },
 
   methods: {
-    submitForm: function(event) {
+    submitForm() {
       this.form.name = this.name;
       this.form.email = this.email;
       this.form.tel = this.email;
@@ -63,10 +63,10 @@ new Vue({
 
       axios.post($(this.form).attr('action'))
         .then((responce) =>{
-          console.log(responce);
+          console.log('Ok: ',responce);
         })
         .catch((error) => {
-          console.log(error);
+          console.log('Error: ',error);
         })
     }
   }
